@@ -158,3 +158,27 @@ instances:
       disable_innodb_metrics: false
 ```
 
+### do configcheck and restart service 
+
+```
+199  datadog-agent configcheck 
+  200  history 
+[root@ip-172-31-36-157 mysql.d]# 
+[root@ip-172-31-36-157 mysql.d]# systemctl restart datadog-agent
+[root@ip-172-31-36-157 mysql.d]# systemctl status datadog-agent
+● datadog-agent.service - Datadog Agent
+     Loaded: loaded (/usr/lib/systemd/system/datadog-agent.service; enabled; preset: disabled)
+     Active: active (running) since Thu 2024-10-24 14:59:16 UTC; 5s ago
+   Main PID: 24819 (agent)
+      Tasks: 9 (limit: 4658)
+     Memory: 96.1M
+```
+
+### Custom Metrics Generation 
+
+<img src="custom11.png">
+
+
+### dogstatsD 
+
+<img src="dogss.png">
