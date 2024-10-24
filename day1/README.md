@@ -61,3 +61,100 @@ systemctl enable --now mariadb
 mysql_secure_installation  
 
 ```
+
+### datadog and mysql db connection 
+
+<img src="mysql1.png">
+
+### Login to database check few details 
+
+```
+ mysql -u root -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 14
+Server version: 10.5.25-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> 
+
+show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+3 rows in set (0.000 sec)
+
+===> Create One account in Database to all access 
+
+CREATE USER 'datadog_user'@'localhost' IDENTIFIED BY 'datadog_password';
+
+===> Granting Permissions
+
+GRANT REPLICATION CLIENT, PROCESS ON *.* TO 'datadog_user'@'localhost';
+
+===> Reload tables permission 
+
+FLUSH privileges;
+
+```
+### verify datadog_user permission 
+
+```
+mysql -u datadog_user -pdatadog_password 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 15
+Server version: 10.5.25-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
++--------------------+
+1 row in set (0.000 sec)
+
+MariaDB [(none)]> exit;
+Bye
+
+```
+### checking show status 
+
+```
+mysql -u datadog_user -pdatadog_password   -e "show status" 
+
+```
+
+### do datadog conf integration 
+
+```
+
+cd /etc/datadog-agent/conf.d/mysql.d/
+nano ashudb.yaml 
+
+init_config:
+
+instances:
+  - host: 127.0.0.1
+    username: 'datadog_user'
+    password: 'datadog_password'
+    port: 3306
+    options:
+      replication: false
+      galera_cluster: true
+      extra_status_metrics: true
+      extra_innodb_metrics: true
+      schema_size_metrics: false
+      disable_innodb_metrics: false
+```
+
