@@ -44,3 +44,20 @@ curl -X POST "https://api.datadoghq.com/api/v1/dashboard" \
  -H "DD-API-KEY: " \
  -H "DD-APPLICATION-KEY: "
 ```
+
+## Database Monitoring 
+
+### installing Mariadb-server
+
+```
+yum install mariadb105-server -y
+
+===> starting database service 
+ 
+systemctl enable --now mariadb
+
+===> setting admin password of DB 
+
+mysql_secure_installation  
+
+```
