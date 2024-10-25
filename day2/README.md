@@ -65,3 +65,12 @@ ashu.py
 [root@ip-172-31-36-157 final_pythonapp]# 
 
 ```
+
+## custom metrics 
+
+<img src="customp.png">
+
+### lets try to find out logs in 400 to 499 http status code series 
+
+<img src="status1.png">
+
