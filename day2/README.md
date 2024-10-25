@@ -53,3 +53,15 @@ ashu-python-webapp  aws  containerd  datadog-agent  python-flask-weathermap  res
 pip install --upgrade datadog 
 
 ```
+### write the code
+
+```
+root@ip-172-31-36-157 final_pythonapp]# ls
+ashu.py
+[root@ip-172-31-36-157 final_pythonapp]# >ashu.py 
+[root@ip-172-31-36-157 final_pythonapp]# 
+[root@ip-172-31-36-157 final_pythonapp]# 
+[root@ip-172-31-36-157 final_pythonapp]# nano ashu.py 
+[root@ip-172-31-36-157 final_pythonapp]# 
+
+```
